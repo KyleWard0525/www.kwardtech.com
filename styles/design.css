@@ -2,6 +2,33 @@
     text-align: center;
 }
 
+.page_main {
+    text-align: center;
+}
+
+/* Full page background image */
+.bg-image {
+    background-image: url("../img/kwardtech_logo.png"); /* Image */
+    height: 100%; /* Cover full page */
+
+    /* Center and scale to fit */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nav-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    cursor: pointer;
+    padding: 15px 15px;
+    transition-duration: 0.25s;
+}
+
+
+/*  Developer notice   */
 #dev_notice {
     font-size: 24;
     font-weight: lighter;
