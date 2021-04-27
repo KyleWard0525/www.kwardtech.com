@@ -17,14 +17,64 @@
     background-size: cover;
 }
 
+/***    NAVIGATION BAR  ***/ 
+
 .nav-button {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid black;
+    border: 2px solid white;
+    border-radius: 15%;
+    background-color: lavender;
     cursor: pointer;
     padding: 15px 15px;
-    transition-duration: 0.25s;
+    transition-duration: 0.3s;
+}
+
+.nav-button:hover {
+    background-color: whitesmoke;
+    color: black;
+    font-style: oblique;
+}  
+
+#nav-bar ul {
+    list-style-type: none; /* Remove bullets from list */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:whitesmoke;
+    width: 100%;
+}
+
+#nav-bar li {
+    float: left; /* Align list items to the left */
+    width: 20%; /*  Give each entry equal space */
+}
+
+#nav-bar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: normal;
+    outline: 1px solid black;
+}
+
+#nav-bar li a:not(.active):hover {
+    background-color: gray;
+    font-weight: bold;
+}
+
+#nav-bar .active {
+    background-color: indigo;
+    color: whitesmoke;
+    font-weight: normal;
+}
+
+#nav-bar .active:hover {
+    font-weight: bold;
 }
 
 
