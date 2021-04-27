@@ -59,7 +59,6 @@
     text-decoration: none;
     font-size: 24px;
     font-weight: normal;
-    outline: 1px solid black;
 }
 
 #nav-bar li a:not(.active):hover {
