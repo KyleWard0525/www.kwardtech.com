@@ -6,6 +6,7 @@
     text-align: center;
 }
 
+
 /* Full page background image for home page */
 .bg-image {
     background-image: url("../img/kwardtech_logo.png"); /* Image */
@@ -48,6 +49,7 @@
 /**************************/
 
 /***    NAVIGATION BAR  ***/ 
+
 
 .nav-button {
     display: block;
@@ -107,8 +109,6 @@
 }
 
 /***************************/
-
-
 
 /*  Developer notice   */
 #dev_notice {
