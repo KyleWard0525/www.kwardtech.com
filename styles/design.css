@@ -29,6 +29,24 @@
     background-size:cover;
 }
 
+/***    Sections      ***/
+.section-break {
+    width: 60%;
+    margin: auto;
+}
+
+.section-p {
+    text-align: left;
+    text-indent: 22%;
+}
+
+.section-spacing {
+    margin-top: 200px;
+}
+
+
+/**************************/
+
 /***    NAVIGATION BAR  ***/ 
 
 .nav-button {
