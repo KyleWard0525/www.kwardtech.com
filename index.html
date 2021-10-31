@@ -1,47 +1,62 @@
+<!DOCTYPE html>
 <html>
-<head>
-    <title>kwardtech.com</title>
-    <link rel="icon" href="img/kwardtech_favicon.png">
-    <link rel="stylesheet" href="styles/design.css">
-    <script type="text/javascript" src="scripts/utils.js"></script>
-</head>
-<body>
+    <head>
+        <meta charset="utf-8">
+        <title>kwardtech.com</title>
+        <meta name="description" content="Webpage for kward60">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
+        <link rel="preload" href="images/space.jpg" as="image">
+        <link rel="icon" href="images/katari-wolf(original).png">
+        <link rel="stylesheet" href="styles/root.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="scripts/root.js"></script>
+        <script src="scripts/challenge.js"></script>
+    </head>
 
-    <!--    Page Header     -->
-    <div class="page_header" id="header_container">
-        <br>
-
-        <!--    Title   -->
-        <h1 id="header_title">Welcome!</h1>
-        <hr /> <!-- End of header line  -->
-        <br>
-
-
-    </div>
-
-    <!--    Main page content   -->
-    <div class="page_main" id="main_container">
+    
+    
+    
+    <body onload="onLoad()">
+        <div class="bg-img"></div>
         
-        <!--In development notice-->
-        <h4 id="dev_notice"><i>This site is currently in development!</i></h4>
-        <br><br>
+        <!-- Page Header -->
+        <header>
+            
+        </header>
 
-        <!-- Check back later notice-->
-        <p>
-            If you would like to know when the site will be live, feel free to check back
-            here periodically for updates!
-        </p>
-        <br>
+        <hr class="px300">
 
-        <!--    Github notice   -->
-        <p>If you are interested in the actual development of the site and would like to understand more or<br>
-            make comments and suggestions, please visit: 
-            <a href="https://github.com/KyleWard0525/www.kwardtech.com">https://github.com/KyleWard0525/www.kwardtech.com</a>
-        </p>
-    </div>
+        <!-- Main page content -->
+        <main>
+            <!-- Title display -->
+            <h1 id="page-title">Kyle Ward</h1>
+            <hr class="px20">
+            <h4 id="page-subtitle"><i>It's okay, I don't know what I'm doing either.</i></h4>
 
+            <hr class="px50">
+            
+            <!-- Button group for links -->
+            <div class="btn-container">
+                <a href="https://webpages.uncc.edu/kward60/itis3135/" target="_blank"><input type="button" id="btn-itis3135" class="btn-link" value="ITIS 3135 Website"></a>
+                <a href="https://github.com/KyleWard0525" target="_blank"><input type="button" id="btn-github" class="btn-link" value="GitHub"></a>
+                <a href="./components/KyleWardResume2021.pdf" class="btn-link" target="_blank" download="KyleWardResume2021.pdf">Resume</a>
+                <input type="button" class="btn-link" id="btn-begin" value="Up for a challenge?" onclick="beginChallenge()">
+            </div>
 
-</body>
+        </main>
 
+        <hr class="px300">
 
+        <!-- Page footer -->
+        <footer>
+            
+        </footer>    
+
+    </body>
+
+    <p id="na"></p>
 </html>
