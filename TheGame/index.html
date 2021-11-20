@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Game</title>
+        <meta name="description" content="Is it really just a game?">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/design.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>  <!-- jQuery-->
+        <script src="scripts/utils.js"></script>
+        <script type="text/javascript" src="scripts/game.js"></script>
+    </head>
+
+    <iframe id="bg-audio" allow="autoplay" hidden></iframe>
+    <body onload="loadPage('index.html')">
+        
+        <div class="bg-img"></div> <!-- Background image -->
+        
+        <header></header>
+        
+        <hr class="px50">
+
+        <main id="index-main">
+            <h1 id='title' class="main-title">Hello there.</h1>
+            <hr class="px20">
+
+            <div id="page-subtitle">
+            <i></i>
+            </div>
+
+            <hr class="px50">
+            
+            <!-- Button group for links -->
+            <div class="btn-container">
+                <input type="button" class="btn-link" id="btn-begin" value="Continue" onclick="window.location.href = 'about-game.html'">
+            </div>
+        </main>
+
+        <hr class="px200">
+
+        <footer></footer>
+    </body>
+
+    <!-- External components -->
+
+
+</html>

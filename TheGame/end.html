@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>About: The Game</title>
+        <meta name="description" content="Is it really just a game?">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/design.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>  <!-- jQuery-->
+        <script src="scripts/utils.js"></script>
+        <script type="text/javascript" src="scripts/game.js"></script>
+    </head>
+
+    <iframe id="bg-audio" allow="autoplay" hidden></iframe>
+    <body onload="loadPage('end.html')">
+        <div id="header"></div>
+        <h1 class="about-title">The Game: Phase 2</h1>
+        <h3 class="subtitle"><i>Software Engineer Application</i></h3>
+        <br>
+
+        <main id="about-main">
+            <div class="section">
+                <hr class="px20">
+                <h3 class="section-title">Please enter your information below
+                    <hr class="section-divider">
+                </h3>
+                
+                <div class="end-msg" id="main-text"></div>
+
+                <form class="app-form" onsubmit="return submitApplication()" method="get">
+
+                    <div class="input-container">
+                        <hr class="px10">
+                        <label for="name">Name: &emsp;<input type="text" class="text-input" id="name" placeholder="Your name" required></label>
+                        <hr class="px10">
+                        <label for="email">Email: &emsp;<input type="email" class="text-input" id="email" placeholder="Your email" required></label>
+                        <hr class="px10">
+                        <label for="phone">Phone number: &emsp;<input type="tel" class="text-input" id="phone" placeholder="555-555-5555" pattern="[0-9]{10}" required></label>
+                        <hr class="px50">
+                        <label for="money">Target compensation: &emsp;<input type="number" class="text-input" id="money" placeholder="$65,000" required></label>
+                    </div>
+                    
+                    <hr class="px75">
+
+                    <input type="submit" class="btn-link" id="btn-submit" value="Submit Application">
+                </form>
+
+            </div>
+            
+            
+        </main>
+
+        <hr class="px200">
+
+        <footer>
+        </footer>
+
+    </body>
+
+    <!-- External components -->
+    
+
+</html>

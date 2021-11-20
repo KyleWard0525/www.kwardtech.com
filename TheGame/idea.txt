@@ -1,0 +1,2 @@
+Each page is a button, a randomly generated code is created, that code
+must be solved by enabling the buttons in a specific order.

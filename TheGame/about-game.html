@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>About: The Game</title>
+        <meta name="description" content="Is it really just a game?">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/design.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>  <!-- jQuery-->
+        <script src="scripts/utils.js"></script>
+        <script type="text/javascript" src="scripts/game.js"></script>
+    </head>
+
+    <iframe id="bg-audio" allow="autoplay" hidden></iframe>
+    <body onload="loadPage('about-game.html')">
+        <div id="header"></div>
+        <h2 class="about-title">About: The Game</h2>
+        <br>
+
+        <main id="about-main">
+            <div class="section">
+                <h3 class="section-title">What is The Game?
+                    <hr class="section-divider">
+                </h3>
+                
+
+                <p>
+                    <i>The Game</i>&ensp;is an online candidate evaluation tool developed for GlobalTech by Katari-Wolf Technology.
+                    This tool is used by GlobalTech to evaluate potential candidates for technical positions that often require
+                    a certain level of critical thinking and reasoning skills. 
+                </p>
+
+                <p>
+                    <b>Here's how it works:</b> &ensp; 
+                    <br>- &ensp; There are 5 buttons. Each button can be ON (green) or OFF (red).
+                    <br>- &ensp; The buttons must be enabled in a specific order. Some buttons may be connected to each other. 
+                    <br>- &ensp; If enabled in the wrong order, the connected button(s) may be effected.
+                    <br>- &ensp; You will have exactly 124 seconds to find the correct sequence and enable the buttons.
+                    <br>- &ensp; If you succeed, you will move on to the next phase. 
+                    <br>- &ensp; If you fail, you will no longer be considered for a position at GlobalTech.
+                </p>
+            </div>
+            
+            
+        </main>
+
+        <hr class="px200">
+
+        <footer>
+            <a href="about-game2.html" class="btn-link" id="btn-next"></a>
+        </footer>
+
+    </body>
+
+    <!-- External components -->
+    
+
+</html>
