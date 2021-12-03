@@ -1,118 +1,151 @@
-.page-header {
-    text-align: center;
+:root {
+    --main-txt-color: #b3001b;
+    --main-txt-bg: #f2f2f2de;
+    --secondary-color: rgb(99, 163, 248);
+    --main-bg-color: #101018;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-.page-main {
+/* Scroll Bar */
+::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0px 0px 4px var(--main-txt-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    background: var(--secondary-color);
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 2px var(--main-bg-color);
+}
+::-webkit-resizer,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner { display: none; }
+
+/*      STYLE BY TAG    */
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    height: 99vh;
+    width: 99vw;
+    position: absolute;
+    background-color: var(--main-bg-color);
+    color: var(--main-txt-color);
+    text-shadow: 0px 0px 1px var(--main-txt-bg);
+    padding-left: 15px;
+    overflow-y: scroll;
+}
+
+/*      STYLE BY Class    */
+.page-title {
+    margin-top: 22%;
+    margin-bottom: 3%;
     text-align: center;
+    font-size: 64px;
+}
+
+.section-title {
+    margin-top: 20%;
+    text-align: center;
+    font-size: 64px;
+}
+
+.page-section {
+    height: 75vh;
 }
 
 
-/* Full page background image for home page */
-.bg-image {
-    background-image: url("../img/kwardtech_logo.png"); /* Image */
-    height: 100%; /* Cover full page */
-
-    /* Center and scale to fit */
-    background-position: center;
+.section-bg-img {
     background-repeat: no-repeat;
-    background-size:cover;
-
+    background-size: cover;
 }
 
-/* For the meme */
-.nice-bg-img {
-    background-image: url("../img/nice.jpg"); /* Image */
-    height: 100%; /* Cover full page */
-
-    /* Center and scale to fit */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover;
+/*      LINE DIVIDERS   */
+hr.divider10pct {
+    width: 10%;
 }
 
-/***    Sections      ***/
-.section-break {
-    width: 60%;
-    margin: auto;
+hr.divider15pct {
+    width: 15%;
 }
 
-.section-p {
-    text-align: left;
-    text-indent: 22%;
+hr.divider80pct {
+    width: 80%;
 }
 
-.section-spacing {
-    margin-top: 200px;
-    margin-bottom: 200px;
+hr.divider90pct {
+    width: 90%;
 }
 
-
-/**************************/
-
-/***    NAVIGATION BAR  ***/ 
-
-
-.nav-button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px solid white;
-    border-radius: 15%;
-    background-color: lavender;
-    cursor: pointer;
-    padding: 15px 15px;
-    transition-duration: 0.3s;
+hr.divider95pct {
+    width: 95%;
 }
 
-.nav-button:hover {
-    background-color: whitesmoke;
-    color: black;
-    font-style: oblique;
-}  
-
-#nav-bar ul {
-    list-style-type: none; /* Remove bullets from list */
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color:whitesmoke;
-    width: 100%;
+/*      LINE BREAKS     */
+hr.px5 {
+    height: 5px;
+    visibility: hidden;
 }
 
-#nav-bar li {
-    float: left; /* Align list items to the left */
-    width: 20%; /*  Give each entry equal space */
+hr.px10 {
+    height: 10px;
+    visibility: hidden;
 }
 
-#nav-bar li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: normal;
+hr.px20 {
+    height: 20px;
+    visibility: hidden;
 }
 
-#nav-bar li a:not(.active):hover {
-    background-color: gray;
-    font-weight: bold;
+hr.px30 {
+    height: 30px;
+    visibility: hidden;
 }
 
-#nav-bar .active {
-    background-color: indigo;
-    color: whitesmoke;
-    font-weight: normal;
+hr.px50 {
+    height: 50px;
+    visibility: hidden;
 }
 
-#nav-bar .active:hover {
-    font-weight: bold;
+hr.px75 {
+    height: 75px;
+    visibility: hidden;
 }
 
-/***************************/
+hr.px100 {
+    height: 100px;
+    visibility: hidden;
+}
 
-/*  Developer notice   */
-#dev_notice {
-    font-size: 24;
-    font-weight: lighter;
+hr.px120 {
+    height: 120px;
+    visibility: hidden;
+}
+
+hr.px200 {
+    height: 200px;
+    visibility: hidden;
+}
+
+hr.px215 {
+    height: 215px;
+    visibility: hidden;
+}
+
+hr.pct80 {
+    height: 80%;
+    visibility: hidden;
+}
+
+hr.pct50 {
+    height: 50%;
+    visibility: hidden;
 }
