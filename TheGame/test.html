@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Testing Page</title>
+        <meta name="description" content="For testing new features">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/design.css">
+        <link rel="stylesheet" href="styles/jquery-ui-1.13.0/jquery-ui.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="styles/jquery-ui-1.13.0/jquery-ui.min.js"></script>
+        <script src="scripts/test.js"></script>
+        
+
+        <!-- jQuery Plugins -->
+
+        <!-- lyltip : Simple custom tooltips-->
+	    <link rel="stylesheet" href="scripts/plugins/lyltip/lyltip.css">
+        <script src="scripts/plugins/lyltip/lyltip.js"></script>
+        <!-------------------------------------->
+
+        <!-- Typewriter : By ZaphodElevated -->
+	    <link rel="stylesheet" href="scripts/plugins/typewriter/cursor.css">
+        <script src="scripts/plugins/typewriter/jquery.typewriter.min.js"></script>
+        <!-------------------------------------->
+
+
+    </head>
+
+    <body onload="testBackend()">
+        <main>
+            <h2 class="page-title">Testing</h2>
+            <hr class="section-divider">
+
+            <section class="test-sect">
+                <input 
+                    type="button" 
+                    class="nav-btn tooltip" 
+                    id="btn-test" 
+                    onclick="selectFile()" 
+                    value="Select File" 
+                    data-tooltip="Please select a file"
+                    data-tooltip-pos="bottom"
+                >
+
+                <hr class="px100">
+                <p class="typewriter">Hello, from Mr. Typewriter!</p>
+
+                <hr class="px200">
+                <div class="progbar"></div>
+
+                <hr class="px200">
+                <p id="flask-result">Result: </p>
+
+            </section>
+
+        </main>
+    </body>
+
+
+</html>
