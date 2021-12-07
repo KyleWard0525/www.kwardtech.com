@@ -296,6 +296,10 @@ input:not(:disabled):hover {
 
 /*      STYLE BY ID    */
 
+#btn-file {
+    margin-left: 11%;
+}
+
 #header {
     display: inline;
 }
