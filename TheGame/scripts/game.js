@@ -2,14 +2,29 @@
  * The Game
 */
 
+// Imports
+import { progressBar, selectFile} from "./utils.js";
+
 const audioPath = "components/audio/"
 const audioFiles = {};
 const images = {};
 const MAX_TIME = 124;
+const PROG_MAX = 100;
 var welcomePhrases = [];
 var gameTime = MAX_TIME;
 var closeTime = 6;
 var pageCloseInterval;
+
+const userFile = {
+    'name': '',
+    'data': '',
+    'type': '',
+
+}
+
+//  Load module functions into the window object
+window.loadPage = loadPage;
+window.selectFile = selectFile;
 
 //  Resources and functions for tracking and handling game states
 const gameCtrl = {
@@ -291,7 +306,9 @@ function preload()
     // Load audio files
     audioFiles['btnClick'] = new Audio(audioPath + "click.mp3");                    //  Button click
     audioFiles['home-bg'] = new Audio(audioPath + "forest-ambient.mp3");            //  Home page background music
-    audioFiles['game-bg'] = new Audio(audioPath + "bg-music.mp3");                   //  Game background music
+    audioFiles['game-bg'] = new Audio(audioPath + "bg-music.mp3");                  //  Game background music
+
+    
 }
 
 //  Load page resources
@@ -358,8 +375,8 @@ function loadPage(page)
             });
         }
 
-        //  About page
-        if(page.includes('-'))
+        //  About page(s)
+        else if(page.includes('-'))
         {
             //  Hide page footer
             $("footer").hide();
@@ -374,12 +391,49 @@ function loadPage(page)
             });
         }
 
+        //  Stage 2
+        else if(page == "stage2.html")
+        {
+           $("#btn-file").on("click", function() {
+               selectFile(readSelectedFile);
+           });
+
+            // Tooltip for button
+            $(".tooltip").lyltip({
+                theme: "dark",
+                margin: 64
+            });
+
+            // Play intro animation
+            playStage2Intro(11);
+        }
+
         //  End Game page (user won)
         if(page == "end.html")
         {
 
         }
     });
+}
+
+// Read file selected by user
+function readSelectedFile(file)
+{
+    // Create file reader 
+    var reader = new FileReader();
+    
+    // Setup function to handle file loads
+    reader.onload = function(e){
+        // Save file data
+        userFile['name'] = file.name;
+        userFile['data'] = e.target.result;
+        userFile['type'] = file.type;
+
+        alert("Your wager:\n" + Object.values(userFile));
+    };
+
+    // Read file 
+    reader.readAsText(file);
 }
 
 //  Load page header
@@ -415,8 +469,6 @@ function loadHeader()
     }
 }
 
-
-
 // Welcome animation
 function playWelcomeAnim()
 {
@@ -443,6 +495,47 @@ function playWelcomeAnim()
             setInterval(playWelcomeAnim(), 3000);
         });
     });
+}
+
+// Play stage 2 intro animation
+function playStage2Intro(msgIdx)
+{
+    // Hide button
+    $("#btn-file").hide();
+
+    // Create intro messages
+    var messages = ["Welcome to Stage 2", "This is the final stage", "One last puzzle to solve",
+    "However, this puzzle is more 'High-stakes'", "You will soon be shown a button",
+    "You must click the button to continue", "You will then be shown a file selector", "Select a file of great importance to you",
+    "If you fail the puzzle, this file will be released", "If you succeed, the file will be untouched", "If you don't select a file...",
+    "You will no longer be a GlobalTech candidate"];
+    
+    // Set typewriter text to the next message
+    $(".typewriter").text(messages[msgIdx]);
+
+    // Initialize progress bar
+    $(".typewriter").typeWrite({
+        speed: 20,
+        color: "green"
+    });
+
+    // Check if all messages have been displayed
+    if(msgIdx < messages.length - 1)
+    {
+        // Show next message
+        setTimeout(playStage2Intro, 5000, msgIdx + 1);
+    }
+    else {
+        clearTimeout(playStage2Intro);
+
+        // Fade out text
+        $(".typewriter").delay(3500).fadeOut(4500, function() {
+
+            // Fade in file select button
+            $("#btn-file").fadeIn(2500);
+        })
+    }
+    
 }
 
 //  Load page secret
