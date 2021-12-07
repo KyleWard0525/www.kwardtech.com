@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Game: Stage 2</title>
+        <meta name="description" content="Is it really just a game?">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/design.css">
+        <link rel="stylesheet" href="styles/jquery-ui-1.13.0/jquery-ui.min.css"> <!-- jQuery UI Styles -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>          <!-- jQuery -->
+        <script src="styles/jquery-ui-1.13.0/jquery-ui.min.js"></script>         <!-- jQuery UI-->
+        <script type="module" src="scripts/utils.js"></script>
+        <script type="module" src="scripts/game.js"></script>
+
+        <!-- jQuery Plugins -->
+
+        <!-- lyltip : Simple custom tooltips-->
+	    <link rel="stylesheet" href="scripts/plugins/lyltip/lyltip.css">
+        <script src="scripts/plugins/lyltip/lyltip.js"></script>
+        <!-------------------------------------->
+
+        <!-- Typewriter : By ZaphodElevated -->
+	    <link rel="stylesheet" href="scripts/plugins/typewriter/cursor.css">
+        <script src="scripts/plugins/typewriter/jquery.typewriter.min.js"></script>
+        <!-------------------------------------->
+
+    </head>
+
+    <iframe id="bg-audio" allow="autoplay" hidden></iframe>
+    <body onload="window.loadPage('stage2.html')">
+        <div id="header"></div>
+        <br>
+
+        <main>
+            <hr class="px200">
+
+            <h3 class="typewriter"></h3>
+            
+            <hr class="px200">
+            <a
+                class="btn-link tooltip" 
+                id="btn-file"
+                data-tooltip="Please select a file"
+                data-tooltip-pos="bottom">Click Here</a>
+        </main>
+
+        <hr class="px200">
+
+        <footer>
+            
+        </footer>
+
+    </body>
+
+    <!-- External components -->
+    
+
+</html>
