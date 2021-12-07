@@ -1,0 +1,93 @@
+.lyltip{
+	--dark-theme: #1D1F20;
+	--light-theme: #F8F9FA;
+	--success-theme: #20ac6b;
+	--danger-theme: #e05260;
+	--info-theme: #51daf6;
+	--warning-theme: #ffd24d;
+
+	--border-theme: var(--dark-theme);
+
+	max-width: 250px;
+	background-color: var(--dark-theme);
+	padding: 10px 20px;
+	position: absolute;
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+	color: #FAFAFA;
+	z-index: 999999;
+	line-height: 1.5;
+	border-radius: 5px;
+	box-shadow: 0 0 26px rgb(0 0 0 / 8%);
+	pointer-events: none;
+}
+
+/*THEMES*/
+.lyltip-theme-light {
+	--border-theme: var(--light-theme);
+	background-color: var(--light-theme);
+
+	color: var(--dark-theme);
+}
+
+.lyltip-theme-success {
+	--border-theme: var(--success-theme);
+	background-color: var(--success-theme);
+
+	color: #FAFAFA;
+}
+
+.lyltip-theme-info {
+	--border-theme: var(--info-theme);
+	background-color: var(--info-theme);
+
+	color: #FAFAFA;
+}
+
+.lyltip-theme-danger {
+	--border-theme: var(--danger-theme);
+	background-color: var(--danger-theme);
+
+	color: #FAFAFA;
+}
+
+.lyltip-theme-warning {
+	--border-theme: var(--warning-theme);
+	background-color: var(--warning-theme);
+
+	color: var(--dark-theme);
+}
+
+/*POSITIONS*/
+.lyltip:before{
+	content: "";
+	width: 0;
+	height: 0;
+	border: 8px solid;
+	border-color: var(--border-theme) transparent transparent transparent;
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	transform: translateX(-50%);
+}
+
+.lyltip-position-left:before{
+	left: 100%;
+	top: 50%;
+	transform: translateX(0) translateY(-50%);
+	border-color: transparent transparent transparent var(--border-theme);
+}
+
+.lyltip-position-right:before{
+	left: 0;
+    top: 50%;
+    transform: translateX(-16px) translateY(-50%);
+    border-color: transparent var(--border-theme) transparent transparent;
+}
+
+.lyltip-position-bottom:before{
+	left: 50%;
+    top: 0;
+    transform: translateX(-50%) translateY(-16px);
+    border-color: transparent transparent var(--border-theme) transparent;
+}

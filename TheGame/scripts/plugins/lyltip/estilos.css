@@ -1,0 +1,27 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	background-color: #FAFAFA;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: 'Open Sans', sans-serif;
+}
+
+a{
+	padding: 10px 20px;
+	background-color: steelblue;
+	text-decoration: none;
+	margin: 0 10px;
+	color: #FAFAFA;
+}
+
+section{
+	margin: 40px 0;
+}
