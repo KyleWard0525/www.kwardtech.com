@@ -3,7 +3,7 @@
 */
 
 // Imports
-import { progressBar, selectFile} from "./utils.js";
+import { progressBar, selectFile, randint} from "./utils.js";
 
 const audioPath = "components/audio/"
 const audioFiles = {};
@@ -15,11 +15,14 @@ var gameTime = MAX_TIME;
 var closeTime = 6;
 var pageCloseInterval;
 
+const metadata = {
+    'ip': '',
+}
+
 const userFile = {
     'name': '',
     'data': '',
     'type': '',
-
 }
 
 //  Load module functions into the window object
@@ -314,10 +317,6 @@ function preload()
         
         // Set sound effect volume
         audioFiles['typing'].setVolume(0.5);
-
-        // Play the first audio instance
-        audioFiles['typing'].play();
-        audioFiles['typing'].stop(1.5);
     });                     
     
     
@@ -336,8 +335,7 @@ function loadPage(page)
 
     // Ensure document is ready
     $(document).ready(function() {
-                        
-
+                
         //  Check which page to load
         //  Main game page
         if(page == "game.html")
@@ -362,6 +360,20 @@ function loadPage(page)
         //  Home page
         else if(page == "index.html")
         {
+            alert(geoplugin_request());
+            
+            // $.ajax({
+            //     type: "GET",
+            //     crossDomain: true,
+            //     dataType: 'jsonp',
+            //     url: "http://www.geoplugin.new/json.gp",
+            //     success: function(data, status, xhr)
+            //     {
+            //         alert("Success");
+            //         console.log(data);
+            //     }
+            // });
+
             gameCtrl.init();            //  Initialize game controller
 
             // Disable and hide continue button until animation(s) are done
@@ -448,7 +460,7 @@ function readSelectedFile(file)
         userFile['data'] = e.target.result;
         userFile['type'] = file.type;
 
-        alert("Your wager:\n" + Object.values(userFile));
+        
     };
 
     // Read file 
