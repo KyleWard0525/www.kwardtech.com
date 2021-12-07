@@ -7,7 +7,7 @@ echo. && echo.
 echo Starting backend...
 echo. && echo.
 
-:: Sleep for 1 second (for dramatic effect)
+:: Sleep for 2 seconds (for dramatic effect)
 timeout /t 2 /nobreak > Nul
 
 :: Read status file to determine if setup has been run
