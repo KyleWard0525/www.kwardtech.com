@@ -25,6 +25,7 @@ const userFile = {
 //  Load module functions into the window object
 window.loadPage = loadPage;
 window.selectFile = selectFile;
+new p5(); 
 
 //  Resources and functions for tracking and handling game states
 const gameCtrl = {
@@ -307,17 +308,35 @@ function preload()
     audioFiles['btnClick'] = new Audio(audioPath + "click.mp3");                    //  Button click
     audioFiles['home-bg'] = new Audio(audioPath + "forest-ambient.mp3");            //  Home page background music
     audioFiles['game-bg'] = new Audio(audioPath + "bg-music.mp3");                  //  Game background music
+    
+    //  Keyboard typing sound effect
+    audioFiles['typing'] = loadSound(audioPath + "typing.mp3", function() {
+        
+        // Set sound effect volume
+        audioFiles['typing'].setVolume(0.5);
 
+        // Play the first audio instance
+        audioFiles['typing'].play();
+        audioFiles['typing'].stop(1.5);
+    });                     
+    
     
 }
+
+//  Functions for p5
+function setup(){};
+function draw(){};
 
 //  Load page resources
 function loadPage(page)
 {
+    //  Preload page resources
+    preload(); 
+    setup();
 
     // Ensure document is ready
     $(document).ready(function() {
-        preload();                  //  Preload page resources
+                        
 
         //  Check which page to load
         //  Main game page
@@ -401,11 +420,11 @@ function loadPage(page)
             // Tooltip for button
             $(".tooltip").lyltip({
                 theme: "dark",
-                margin: 64
+                margin: 81
             });
 
             // Play intro animation
-            playStage2Intro(11);
+            playStage2Intro(0);
         }
 
         //  End Game page (user won)
@@ -510,20 +529,39 @@ function playStage2Intro(msgIdx)
     "If you fail the puzzle, this file will be released", "If you succeed, the file will be untouched", "If you don't select a file...",
     "You will no longer be a GlobalTech candidate"];
     
+    // Check if sounds have loaded 
+    if(audioFiles['typing'].isLoaded())
+    {
+        // Start typing sound effect
+        
+        audioFiles['typing'].play();
+        
+        let delay = 1 + (messages[msgIdx].length / 19);
+
+        audioFiles['typing'].stop(delay);
+    }
+    
+
     // Set typewriter text to the next message
     $(".typewriter").text(messages[msgIdx]);
-
+    
     // Initialize progress bar
     $(".typewriter").typeWrite({
         speed: 20,
         color: "green"
     });
 
+    
+
     // Check if all messages have been displayed
     if(msgIdx < messages.length - 1)
     {
         // Show next message
         setTimeout(playStage2Intro, 5000, msgIdx + 1);
+
+        // Get length of message so far
+        let msgTxt = $(".typewriter").text();
+
     }
     else {
         clearTimeout(playStage2Intro);
@@ -535,6 +573,8 @@ function playStage2Intro(msgIdx)
             $("#btn-file").fadeIn(2500);
         })
     }
+
+    
     
 }
 
