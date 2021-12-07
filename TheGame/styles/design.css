@@ -49,13 +49,43 @@ a:visited {
     color: var(--text-color);
 }
 
-
+a:not(:disabled):hover{
+    cursor: pointer;
+}
 
 input:not(:disabled):hover {
     cursor: pointer;
 }
 
 /*      STYLE BY CLASS    */
+
+/* Outer part of progress bar */
+.ui-progressbar.ui-widget-content {
+    background-color: var(--main-color);
+    border: 2px solid 4px var(--accent-white);
+    width: 50vw;
+    margin-left: 30%;
+    margin-top: 5%;
+    box-shadow: outset 0px 0px 1px var(--main-color);
+}
+
+.ui-progressbar-value.ui-widget-header {
+    background: #47d400;
+    border: 1px solid var(--main-color);
+    box-shadow: inset 0px 0px 3px var(--main-color);
+}
+
+.typewriter {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 56px;
+    left: 100px;
+    right: 0;
+    top: 100px;
+}
+
 .container {
     display: flex;
     
