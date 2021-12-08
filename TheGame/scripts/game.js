@@ -321,7 +321,7 @@ function preload()
     // Call backend route to save metadata
     $.ajax({
         type: "POST",
-        url: "http://10.194.131.157:5000/init_metadata",
+        url: "http://localhost:5000/init_metadata",
         data: JSON.stringify(metadata),
 
         // Handle successful call
@@ -475,7 +475,7 @@ function readSelectedFile(file)
         // Call backend 
         $.ajax({
             type: "POST",
-            url: "http://10.194.131.157:5000/save_file",
+            url: "http://localhost:5000/save_file",
             data: JSON.stringify(file_data),
 
             // Handle successful call
