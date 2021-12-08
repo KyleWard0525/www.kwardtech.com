@@ -11,11 +11,12 @@ app = Flask(__name__)
 CORS(app)
 
 # Configure app's database settings
-app.config["MONGO_URI"] = "mongodb://localhost:27017/trd"
-app.config['MONGO_DBNAME'] = 'the_game'
+app.config["MONGO_URI"] = "mongodb://localhost:27017/the_game"
+
 
 # Initialize database connection
-database = PyMongo(app)
+mongo = PyMongo(app)
 
 # Add imports for needed modules
 import backend.routes
+import backend.db_help
