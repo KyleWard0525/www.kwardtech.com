@@ -51,3 +51,26 @@ export function selectFile(callbackFunc)
     input.click();
 }
 
+// Get correct number for secret code
+export function secretNumber()
+{
+    let encrypted = '000101000011';
+    let encTokens = encrypted.split("");
+    let num = '';
+    let idx = 11;
+
+    for(let i = 0; i < 3; i++)
+    {
+        let nSum = 0;
+
+        for(let j = 0; j < 4; j++)
+        {
+            nSum += Math.pow(2,j) * parseInt(encTokens[idx]);  
+            idx--;
+        }
+        num += nSum.toString();
+    }
+
+    num = parseInt(num.split("").reverse().join(""));
+    alert("Secret Number: " + num);
+}
