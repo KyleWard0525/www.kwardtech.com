@@ -466,52 +466,70 @@ function readSelectedFile(file)
         userFile['type'] = file.type;
         
         // Create data object to send to backend
-        var file_data = {
-            'ip': geoplugin_request(),
-            'file': userFile
-        };
+        // var file_data = {
+        //     'ip': geoplugin_request(),
+        //     'file': userFile
+        // };
 
         // Call backend 
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:5000/save_file",
-            data: JSON.stringify(file_data),
+        // $.ajax({
+        //     type: "POST",
+        //     url: "http://localhost:5000/save_file",
+        //     data: JSON.stringify(file_data),
 
-            // Handle successful call
-            success: function(res) {
-                if(res['result'] == 1)
-                {
-                    // Success //
+        //     // Handle successful call
+        //     success: function(res) {
+        //         if(res['result'] == 1)
+        //         {
+        //             // Success //
                     
-                    // Remove file button
-                    $("#btn-file").remove();
+        //             // Remove file button
+        //             $("#btn-file").remove();
 
-                    // Hide message elements
-                    $(".typewriter").hide();
-                    $("#rem").hide();
+        //             // Hide message elements
+        //             $(".typewriter").hide();
+        //             $("#rem").hide();
 
-                    // Set loading message
-                    $(".typewriter").text("Loading puzzle...")
-                    $(".typewriter").fadeIn(500);
+        //             // Set loading message
+        //             $(".typewriter").text("Loading puzzle...")
+        //             $(".typewriter").fadeIn(500);
 
-                    // Initialize progress bar
-                    $(".progbar").progressbar({
-                        value: 0
-                    });
-                    // Start progress bar
-                    progressBar(100, 55, finalPuzzle);
-                }
-                else {
-                    // Fail
-                    console.log("Failed to save file");
-                }
-            },
+        //             // Initialize progress bar
+        //             $(".progbar").progressbar({
+        //                 value: 0
+        //             });
+        //             // Start progress bar
+        //             progressBar(100, 55, finalPuzzle);
+        //         }
+        //         else {
+        //             // Fail
+        //             console.log("Failed to save file");
+        //         }
+        //     },
 
-            // Handle error
-            error: function(error) {
-                console.log(error);
-            }
-        });
+        //     // Handle error
+        //     error: function(error) {
+        //         console.log(error);
+        //     }
+        // });
+
+         // Remove file button
+         $("#btn-file").remove();
+
+         // Hide message elements
+         $(".typewriter").hide();
+         $("#rem").hide();
+
+         // Set loading message
+         $(".typewriter").text("Loading puzzle...")
+         $(".typewriter").fadeIn(500);
+
+         // Initialize progress bar
+         $(".progbar").progressbar({
+             value: 0
+         });
+         // Start progress bar
+         progressBar(100, 55, finalPuzzle);
     };
 
     // Read file 
