@@ -4,7 +4,6 @@
 
 // Imports
 import { progressBar, selectFile, randint, secretNumber} from "./utils.js";
-import { getUserMetadata } from "./metadata.js";
 
 const audioPath = "components/audio/";
 const audioFiles = {};
@@ -316,7 +315,7 @@ function preload()
     audioFiles['game-bg'] = new Audio(audioPath + "bg-music.mp3");                  //  Game background music            
     
     // Get metadata
-    metadata = getUserMetadata();
+    metadata = '';//getUserMetadata();
     
     // Call backend route to save metadata
     $.ajax({
