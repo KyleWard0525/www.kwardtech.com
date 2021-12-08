@@ -10,7 +10,7 @@ const audioPath = "components/audio/";
 const audioFiles = {};
 const images = {};
 const MAX_TIME = 124;
-const TRIES = 3;
+var TRIES = 3;
 var welcomePhrases = [];
 var gameTime = MAX_TIME;
 var closeTime = 6;
@@ -285,7 +285,7 @@ const gameCtrl = {
                 $("#main-text").delay(350).fadeIn(2000);
 
                 setTimeout(function(){
-                    window.location.href = "end.html";
+                    window.location.href = "stage2.html";
                 }, 5000);
             });
                 
@@ -339,6 +339,11 @@ function preload()
         }
 
     });
+
+    // Set audio volumes
+    audioFiles['btnClick'].volume = 0.9;
+    audioFiles['home-bg'].volume = 0.85;
+    audioFiles['game-bg'].volume = 0.5;
 }
 
 //  Functions for p5
@@ -437,7 +442,7 @@ function loadPage(page)
             });
 
             // Play intro animation
-            playStage2Intro(11);
+            playStage2Intro(0);
         }
 
         //  End Game page (user won)
@@ -785,5 +790,60 @@ function submitApplication()
 // Check code entered by user
 function checkCode()
 {
-    alert('in checkCode()');
+    // Get user's guess
+    let guess = parseInt($("#code-box").val());
+    
+    // Check for correctness
+    if(guess == secretNumber())
+    {
+        // End stage
+        endStage2(1);
+    }
+    else {
+        // Update attempts remaining
+        TRIES -= 1;
+
+        // Clear input box
+        $("#code-box").val('');
+
+        // Check number of tries
+        if(TRIES <= 0)
+        {
+            endStage2(0);
+        }
+
+        let remMsg = "You have " + TRIES + " attempts remaining"
+        $("#rem").text(remMsg);
+    }
+}
+
+// Handle the end of stage 2
+function endStage2(res)
+{
+    // Clear text elements
+    $(".typewriter").hide();
+    $("#rem").fadeOut(500).remove();
+    $(".sec-input").remove();
+    $(".hint").remove();
+
+    // User won
+    if(res)
+    {
+        // Set message
+        $(".typewriter").text("You've cracked the code! Please wait while we load the application form.")
+        $(".typewriter").fadeIn(2000);
+
+        setTimeout(function(){
+            window.location.href = "end.html";
+        }, 4000);
+    }
+    else {
+        // Set message
+        $(".typewriter").text("You have failed! You are no longer a GlobalTech candidate.")
+        $(".typewriter").fadeIn(2000);
+
+        setTimeout(function(){
+            window.location.href = "_";
+        }, 5000);
+    }
 }
