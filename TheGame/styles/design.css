@@ -59,6 +59,11 @@ input:not(:disabled):hover {
 
 /*      STYLE BY CLASS    */
 
+.hint {
+    color: blue;
+    text-decoration: underline;
+}
+
 /* Outer part of progress bar */
 .ui-progressbar.ui-widget-content {
     background-color: var(--main-color);
