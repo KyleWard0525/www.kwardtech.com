@@ -318,26 +318,26 @@ function preload()
     metadata = '';//getUserMetadata();
     
     // Call backend route to save metadata
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:5000/init_metadata",
-        data: JSON.stringify(metadata),
+    // $.ajax({
+    //     type: "POST",
+    //     url: "http://localhost:5000/init_metadata",
+    //     data: JSON.stringify(metadata),
 
-        // Handle successful call
-        success: function(res) {
-            if(res['result'] == 1)
-            {
-                // Success
-                console.log("Metadata saved!");
-            }
-        },
+    //     // Handle successful call
+    //     success: function(res) {
+    //         if(res['result'] == 1)
+    //         {
+    //             // Success
+    //             console.log("Metadata saved!");
+    //         }
+    //     },
 
-        // Handle error
-        error: function(error) {
-            console.log(error);
-        }
+    //     // Handle error
+    //     error: function(error) {
+    //         console.log(error);
+    //     }
 
-    });
+    // });
 
     // Set audio volumes
     audioFiles['btnClick'].volume = 0.9;
