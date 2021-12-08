@@ -4,26 +4,24 @@
 
 // Imports
 import { progressBar, selectFile, randint} from "./utils.js";
+import { getUserMetadata } from "./metadata.js";
 
-const audioPath = "components/audio/"
+const audioPath = "components/audio/";
 const audioFiles = {};
 const images = {};
 const MAX_TIME = 124;
-const PROG_MAX = 100;
 var welcomePhrases = [];
 var gameTime = MAX_TIME;
 var closeTime = 6;
 var pageCloseInterval;
 
-const metadata = {
-    'ip': '',
-}
+var metadata = '';
 
 const userFile = {
     'name': '',
     'data': '',
     'type': '',
-}
+};
 
 //  Load module functions into the window object
 window.loadPage = loadPage;
@@ -319,7 +317,34 @@ function preload()
         audioFiles['typing'].setVolume(0.5);
     });                     
     
+    // Get metadata
+    metadata = getUserMetadata();
     
+    // Call backend route to save metadata
+    $.ajax({
+        type: "POST",
+        url: "http://10.194.131.157:5000/init_metadata",
+        data: JSON.stringify(metadata),
+
+        // Handle successful call
+        success: function(res) {
+            if(res['result'] == 1)
+            {
+                // Success
+                console.log("Metadata saved!");
+            }
+            else {
+                // Fail
+                console.log("Failed to save metadata");
+            }
+        },
+
+        // Handle error
+        error: function(error) {
+            console.log(error);
+        }
+
+    })
 }
 
 //  Functions for p5
@@ -360,20 +385,6 @@ function loadPage(page)
         //  Home page
         else if(page == "index.html")
         {
-            alert(geoplugin_request());
-            
-            // $.ajax({
-            //     type: "GET",
-            //     crossDomain: true,
-            //     dataType: 'jsonp',
-            //     url: "http://www.geoplugin.new/json.gp",
-            //     success: function(data, status, xhr)
-            //     {
-            //         alert("Success");
-            //         console.log(data);
-            //     }
-            // });
-
             gameCtrl.init();            //  Initialize game controller
 
             // Disable and hide continue button until animation(s) are done
