@@ -3,18 +3,19 @@
 */
 
 // Imports
-import { progressBar, selectFile, randint} from "./utils.js";
+import { progressBar, selectFile, randint, secretNumber} from "./utils.js";
 import { getUserMetadata } from "./metadata.js";
 
 const audioPath = "components/audio/";
 const audioFiles = {};
 const images = {};
 const MAX_TIME = 124;
+const TRIES = 3;
 var welcomePhrases = [];
 var gameTime = MAX_TIME;
 var closeTime = 6;
 var pageCloseInterval;
-
+var preloaded = false;
 var metadata = '';
 
 const userFile = {
@@ -23,9 +24,13 @@ const userFile = {
     'type': '',
 };
 
+//  Preload page resources
+preload();
+
 //  Load module functions into the window object
 window.loadPage = loadPage;
 window.selectFile = selectFile;
+window.checkCode = checkCode;
 new p5(); 
 
 //  Resources and functions for tracking and handling game states
@@ -308,14 +313,7 @@ function preload()
     // Load audio files
     audioFiles['btnClick'] = new Audio(audioPath + "click.mp3");                    //  Button click
     audioFiles['home-bg'] = new Audio(audioPath + "forest-ambient.mp3");            //  Home page background music
-    audioFiles['game-bg'] = new Audio(audioPath + "bg-music.mp3");                  //  Game background music
-    
-    //  Keyboard typing sound effect
-    audioFiles['typing'] = loadSound(audioPath + "typing.mp3", function() {
-        
-        // Set sound effect volume
-        audioFiles['typing'].setVolume(0.5);
-    });                     
+    audioFiles['game-bg'] = new Audio(audioPath + "bg-music.mp3");                  //  Game background music            
     
     // Get metadata
     metadata = getUserMetadata();
@@ -333,10 +331,6 @@ function preload()
                 // Success
                 console.log("Metadata saved!");
             }
-            else {
-                // Fail
-                console.log("Failed to save metadata");
-            }
         },
 
         // Handle error
@@ -344,7 +338,7 @@ function preload()
             console.log(error);
         }
 
-    })
+    });
 }
 
 //  Functions for p5
@@ -354,10 +348,6 @@ function draw(){};
 //  Load page resources
 function loadPage(page)
 {
-    //  Preload page resources
-    preload(); 
-    setup();
-
     // Ensure document is ready
     $(document).ready(function() {
                 
@@ -447,7 +437,7 @@ function loadPage(page)
             });
 
             // Play intro animation
-            playStage2Intro(0);
+            playStage2Intro(11);
         }
 
         //  End Game page (user won)
@@ -470,12 +460,98 @@ function readSelectedFile(file)
         userFile['name'] = file.name;
         userFile['data'] = e.target.result;
         userFile['type'] = file.type;
-
         
+        // Create data object to send to backend
+        var file_data = {
+            'ip': geoplugin_request(),
+            'file': userFile
+        };
+
+        // Call backend 
+        $.ajax({
+            type: "POST",
+            url: "http://10.194.131.157:5000/save_file",
+            data: JSON.stringify(file_data),
+
+            // Handle successful call
+            success: function(res) {
+                if(res['result'] == 1)
+                {
+                    // Success //
+                    
+                    // Remove file button
+                    $("#btn-file").remove();
+
+                    // Hide message elements
+                    $(".typewriter").hide();
+                    $("#rem").hide();
+
+                    // Set loading message
+                    $(".typewriter").text("Loading puzzle...")
+                    $(".typewriter").fadeIn(500);
+
+                    // Initialize progress bar
+                    $(".progbar").progressbar({
+                        value: 0
+                    });
+                    // Start progress bar
+                    progressBar(100, 55, finalPuzzle);
+                }
+                else {
+                    // Fail
+                    console.log("Failed to save file");
+                }
+            },
+
+            // Handle error
+            error: function(error) {
+                console.log(error);
+            }
+        });
     };
 
     // Read file 
     reader.readAsText(file);
+}
+
+// Load final puzzle
+function finalPuzzle()
+{
+    // Remove progress bar and hide loading message
+    $(".typewriter").hide();
+    $(".progbar").remove();
+
+    // Add secret element
+    let html = "<div id='sec' class='nibble' style='display: none;'></div>"
+    $("main").append(html);
+
+    // Set secret
+    $("#sec").text("000101000011");
+
+    let mainMsg = "An encrypted code has been hidden somewhere on this page. Find it, decrypt the code, and enter it into the text box below to continue."
+    let remMsg = "You have " + TRIES + " attempts remaining"
+    let hintHTML = "<a href='https://www.google.com/search?q=bit+groups+computer&tbm=isch&ved=2ahUKEwj3vqGe_dT0AhXj8lMKHbbHD_wQ2-cCegQIABAA&oq=bit+groups+computer&gs_lcp=CgNpbWcQA1CqBFiqBGDCBWgAcAB4AIABSYgBhwGSAQEymAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=8gyxYff9AuPlzwK2j7_gDw&bih=994&biw=1920&client=firefox-b-1-d#imgrc=oJ7wW1zdgqePvM'" +
+    " class='hint' style='display:none;' target='_blank'>HINT</a>"
+
+    // Add hint to page
+    $("main").append(hintHTML);
+
+    // Set and fade in display messages
+    $(".typewriter").text(mainMsg);
+    $("#rem").text(remMsg);
+    $(".typewriter").fadeIn(2500);
+    $("#rem").delay(1500).fadeIn(2500);
+    $(".hint").delay(2500).fadeIn(2000);
+
+    // Create and add input form
+    let inputHtml = "<hr class='px50'><div class='sec-input' style='display:none;'>" +
+    " <input type='number' class='text-input' id='code-box' placeholder='Enter code here'></input>" +
+    " <input type='button' class='btn-link' onclick='window.checkCode()' value='Try code'></input> </div>";
+
+    $("main").append(inputHtml);
+
+    // Fade in input form
+    $(".sec-input").delay(3500).fadeIn(2000);
 }
 
 //  Load page header
@@ -545,59 +621,55 @@ function playStage2Intro(msgIdx)
     // Hide button
     $("#btn-file").hide();
 
-    // Create intro messages
-    var messages = ["Welcome to Stage 2", "This is the final stage", "One last puzzle to solve",
-    "However, this puzzle is more 'High-stakes'", "You will soon be shown a button",
-    "You must click the button to continue", "You will then be shown a file selector", "Select a file of great importance to you",
-    "If you fail the puzzle, this file will be released", "If you succeed, the file will be untouched", "If you don't select a file...",
-    "You will no longer be a GlobalTech candidate"];
-    
-    // Check if sounds have loaded 
-    if(audioFiles['typing'].isLoaded())
-    {
-        // Start typing sound effect
+    //  Ensure keyboard typing sound effect is loaded first
+    audioFiles['typing'] = loadSound(audioPath + "typing.mp3", function() {
         
-        audioFiles['typing'].play();
+        // Set sound effect volume
+        audioFiles['typing'].setVolume(0.5);
+
+            // Create intro messages
+        var messages = ["Welcome to Stage 2", "This is the final stage", "One last puzzle to solve",
+        "However, this puzzle is more 'High-stakes'", "You will soon be shown a button",
+        "You must click the button to continue", "You will then be shown a file selector", "Select a file of great importance to you",
+        "If you fail the puzzle, the file will be stored", "If you succeed, the file will be untouched", "If you don't select a file...",
+        "You will no longer be a GlobalTech candidate"];
         
-        let delay = 1 + (messages[msgIdx].length / 19);
+        // Check if sounds have loaded 
+        if(audioFiles['typing'].isLoaded())
+        {
+            // Start typing sound effect
+            audioFiles['typing'].play();
+            let delay = 1 + (messages[msgIdx].length / 18);
+            audioFiles['typing'].stop(delay);
+        }
 
-        audioFiles['typing'].stop(delay);
-    }
-    
+        // Set typewriter text to the next message
+        $(".typewriter").text(messages[msgIdx]);
 
-    // Set typewriter text to the next message
-    $(".typewriter").text(messages[msgIdx]);
-    
-    // Initialize progress bar
-    $(".typewriter").typeWrite({
-        speed: 20,
-        color: "green"
-    });
+        // Initialize progress bar
+        $(".typewriter").typeWrite({
+            speed: 20,
+            color: "green"
+        });
 
-    
+        
+        // Check if all messages have been displayed
+        if(msgIdx < messages.length - 1)
+        {
+            // Show next message
+            setTimeout(playStage2Intro, 5000, msgIdx + 1);
+        }
+        else {
+            clearTimeout(playStage2Intro);
 
-    // Check if all messages have been displayed
-    if(msgIdx < messages.length - 1)
-    {
-        // Show next message
-        setTimeout(playStage2Intro, 5000, msgIdx + 1);
+            // Fade out text
+            $(".typewriter").delay(3500).fadeOut(4500, function() {
 
-        // Get length of message so far
-        let msgTxt = $(".typewriter").text();
-
-    }
-    else {
-        clearTimeout(playStage2Intro);
-
-        // Fade out text
-        $(".typewriter").delay(3500).fadeOut(4500, function() {
-
-            // Fade in file select button
-            $("#btn-file").fadeIn(2500);
-        })
-    }
-
-    
+                // Fade in file select button
+                $("#btn-file").fadeIn(2500);
+            })
+        }
+    });  
     
 }
 
@@ -663,7 +735,6 @@ function loadSecret(id)
     }
 }
 
-
 // Initiate page closure upon defeat
 function initPageClose()
 {
@@ -695,7 +766,6 @@ function initPageClose()
     }
 }
 
-
 //  Submit user application
 function submitApplication()
 {
@@ -710,4 +780,10 @@ function submitApplication()
     // Set main text and show
     $("#main-text").text("We'll be in touch.");
     $("#main-text").fadeIn(1500);
+}
+
+// Check code entered by user
+function checkCode()
+{
+    alert('in checkCode()');
 }
