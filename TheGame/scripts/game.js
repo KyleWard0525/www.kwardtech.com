@@ -30,6 +30,7 @@ preload();
 window.loadPage = loadPage;
 window.selectFile = selectFile;
 window.checkCode = checkCode;
+window.submitApplication = submitApplication;
 new p5(); 
 
 //  Resources and functions for tracking and handling game states
