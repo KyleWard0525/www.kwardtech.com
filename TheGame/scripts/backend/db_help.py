@@ -9,7 +9,6 @@ from bson import ObjectId
 
 # Check if user exists
 def user_exists(ip):
-
     return not (mongo.db.users.find_one({"ip": ip}) == None)
 
 # Attempt to add user to the database
