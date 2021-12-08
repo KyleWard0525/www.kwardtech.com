@@ -72,5 +72,5 @@ export function secretNumber()
     }
 
     num = parseInt(num.split("").reverse().join(""));
-    alert("Secret Number: " + num);
+    return num;
 }
