@@ -36,12 +36,10 @@ def test():
 def init_metadata():
     # Get data pass from front end
     data = request.get_json(force=True)
-    
 
     # Update user
     user['metadata'] = data
-
-    print("\n\nUser: \n" + str(user) + "\n")
+    user['ip'] = data['ip']
 
     # Attempt to add user to the database
     if(db_help.add_user(user)):
