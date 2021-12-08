@@ -15,20 +15,20 @@ user = {
     'metadata': {}          # User metadata 
 }
 
-# App route to test communicating between Flask and AJAX
-@app.route("/test", methods=["POST", "GET"])
-def test():
+# # App route to test communicating between Flask and AJAX
+# @app.route("/test", methods=["POST", "GET"])
+# def test():
     
-    # Get data pass from front end
-    data = request.get_json(force=True)
+#     # Get data pass from front end
+#     data = request.get_json(force=True)
 
-    print("\nData from frontend: " + str(data))
+#     print("\nData from frontend: " + str(data))
 
-    # Modify data
-    result = data['value'] + 1
+#     # Modify data
+#     result = data['value'] + 1
 
-    # Return to the frontend
-    return {"result": result}
+#     # Return to the frontend
+#     return {"result": result}
 
 
 # Save user's initial  metadata
@@ -56,10 +56,7 @@ def init_metadata():
 def save_file():
     # Get data pass from front end
     data = request.get_json(force=True)
-
     user_ip = data['ip']
-
-    print(f"\nData from frontend\n\tUSER IP: {user_ip}\n\tFILE: {data['file']}")
     
     # Ensure user is in the database
     if db_help.user_exists(user_ip):
