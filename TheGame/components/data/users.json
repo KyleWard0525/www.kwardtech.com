@@ -1,0 +1,39 @@
+{
+    "users": [
+        {
+        "id": 0,
+        "name": "Kyle",
+        "email": "test@email.com",
+        "tel": "123-456-7890",
+        "comp": 75000
+    },
+    {
+        "id": 1,
+        "name": "Todd",
+        "email": "todd@email.com",
+        "tel": "142-436-7890",
+        "comp": 65000
+    },
+    {
+        "id": 2,
+        "name": "Bob",
+        "email": "bob@email.com",
+        "tel": "142-497-7850",
+        "comp": 125000
+    },
+    {
+        "id": 3,
+        "name": "Chad",
+        "email": "chad@email.com",
+        "tel": "1-800-CHAD",
+        "comp": -1
+    },
+    {
+        "id": 4,
+        "name": "Grace",
+        "email": "hopper@email.com",
+        "tel": "142-179-2236",
+        "comp": 68500
+    }
+]
+}
