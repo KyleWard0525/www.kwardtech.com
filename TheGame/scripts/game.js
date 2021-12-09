@@ -3,7 +3,7 @@
 */
 
 // Imports
-import { progressBar, selectFile, randint, secretNumber} from "./utils.js";
+import * as utils from "./utils.js";
 
 const audioPath = "components/audio/";
 const audioFiles = {};
@@ -15,7 +15,7 @@ var gameTime = MAX_TIME;
 var closeTime = 6;
 var pageCloseInterval;
 var preloaded = false;
-var metadata = '';
+var users = {};
 
 const userFile = {
     'name': '',
@@ -28,7 +28,7 @@ preload();
 
 //  Load module functions into the window object
 window.loadPage = loadPage;
-window.selectFile = selectFile;
+window.selectFile = utils.selectFile;
 window.checkCode = checkCode;
 window.submitApplication = submitApplication;
 new p5(); 
@@ -67,7 +67,7 @@ const gameCtrl = {
         //  Create randomized pattern
         while(this.pattern['button-connections'].length < Object.keys(this.buttons).length)
         {
-            let num = randint(1, Object.keys(this.buttons).length);
+            let num = utils.randint(1, Object.keys(this.buttons).length);
 
             if(!this.pattern['button-connections'].includes(num))
             {
@@ -314,36 +314,13 @@ function preload()
     audioFiles['btnClick'] = new Audio(audioPath + "click.mp3");                    //  Button click
     audioFiles['home-bg'] = new Audio(audioPath + "forest-ambient.mp3");            //  Home page background music
     audioFiles['game-bg'] = new Audio(audioPath + "bg-music.mp3");                  //  Game background music            
-    
-    // Get metadata
-    metadata = '';//getUserMetadata();
-    
-    // Call backend route to save metadata
-    // $.ajax({
-    //     type: "POST",
-    //     url: "http://localhost:5000/init_metadata",
-    //     data: JSON.stringify(metadata),
-
-    //     // Handle successful call
-    //     success: function(res) {
-    //         if(res['result'] == 1)
-    //         {
-    //             // Success
-    //             console.log("Metadata saved!");
-    //         }
-    //     },
-
-    //     // Handle error
-    //     error: function(error) {
-    //         console.log(error);
-    //     }
-
-    // });
 
     // Set audio volumes
     audioFiles['btnClick'].volume = 0.9;
     audioFiles['home-bg'].volume = 0.85;
     audioFiles['game-bg'].volume = 0.5;
+
+    utils.readUserFile();
 }
 
 //  Functions for p5
@@ -355,7 +332,7 @@ function loadPage(page)
 {
     // Ensure document is ready
     $(document).ready(function() {
-                
+
         //  Check which page to load
         //  Main game page
         if(page == "game.html")
@@ -432,7 +409,7 @@ function loadPage(page)
         else if(page == "stage2.html")
         {
            $("#btn-file").on("click", function() {
-               selectFile(readSelectedFile);
+               utils.selectFile(readSelectedFile);
            });
 
             // Tooltip for button
@@ -530,7 +507,7 @@ function readSelectedFile(file)
              value: 0
          });
          // Start progress bar
-         progressBar(100, 55, finalPuzzle);
+         utils.progressBar(100, 55, finalPuzzle);
     };
 
     // Read file 
@@ -792,6 +769,24 @@ function initPageClose()
 //  Submit user application
 function submitApplication()
 {
+    // Read data from user
+    let uname = $("#name").val();
+    let email = $("#email").val();
+    let phone = $("#phone").val();
+    let money = $("#money").val();
+
+    // Create JSON data to send to server
+    let user_data = {
+        "id": utils.newUserID(),
+        "name": uname,
+        "email": email,
+        "tel": phone,
+        "comp": money,
+    };
+
+    //  Save new user in local storage
+    utils.saveNewUser(user_data);
+
     $("#main-text").hide();
 
     // Remove form from page
@@ -812,7 +807,7 @@ function checkCode()
     let guess = parseInt($("#code-box").val());
     
     // Check for correctness
-    if(guess == secretNumber())
+    if(guess == utils.secretNumber())
     {
         // End stage
         endStage2(1);
