@@ -2,6 +2,7 @@
  * Utilities for supporting the game
  */
 
+var users = {};
 
 // Show progress bar
 export function progressBar(max, delay, callback)
@@ -73,4 +74,74 @@ export function secretNumber()
 
     num = parseInt(num.split("").reverse().join(""));
     return num;
+}
+
+// Read user data from json file
+export function readUserFile()
+{
+    // User file path
+    let filepath = "components/data/users.json";
+
+    // Use ajax to read file
+    $.ajax({
+        type: "GET",
+        url: filepath,
+        dataType: "json",
+
+        // Loaded successfully
+        success: function(data)
+        {
+            // Save data to local storage
+            localStorage.setItem("users", JSON.stringify(data['users']));
+        },
+
+        // Error loading file
+        error: function(error) 
+        {
+            console.log("\nERROR in utils.readUserFile(): " + error + "\n");
+        }
+    });
+}
+
+// Generate new user id
+export function newUserID()
+{
+    return Date.now();
+}
+
+export function userExists(id)
+{
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    // Loop through users
+    for(let i = 0; i < Object.keys(users).length; i++)
+    {
+        // Select user
+        let user = users[i];
+
+        // Check if IDs match
+        if(user['id'] == id)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+export function saveNewUser(user)
+{
+    //  Ensure user doesn't exist
+    if(!userExists(user['id']))
+    {
+        // Get current users
+        let users = JSON.parse(localStorage.getItem("users"));
+
+        // Append new user
+        users[Object.keys(users).length] = user;
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+    else {
+        console.log("\nERROR in utils.saveNewUser(): User already exists");
+    }
 }
